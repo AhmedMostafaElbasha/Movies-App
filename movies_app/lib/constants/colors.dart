@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const moviesBackgroundColor = Color(0x1d1d27);
-const moviesHeadingColor = Color(0xFFFFFF);
-const moviesSearchTextColor = Color(0x595967);
-const moviesMetaScoreColor = Color(0x74c283);
-const moviesRatingIconColor = Color(0xf65960);
+const moviesBackgroundColor = Color.fromRGBO(29, 29, 39, 1.0);
+const moviesTextColor = Colors.white;
+const moviesSearchTextColor = Color.fromRGBO(85, 85, 98, 1.0);
+const moviesMetaScoreColor = Color.fromRGBO(112, 191, 127, 1.0);
+const moviesRatingIconColor = Color.fromRGBO(249, 88, 98, 1.0);
