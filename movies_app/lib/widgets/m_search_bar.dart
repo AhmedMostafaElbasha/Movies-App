@@ -20,10 +20,19 @@ class _MSearchBarState extends State<MSearchBar> {
       maxLines: 1,
       textAlign: TextAlign.start,
       cursorColor: moviesSearchTextColor,
+      style: TextStyle(fontSize: 27, color: moviesSearchTextColor),
       decoration: InputDecoration(
+        hintMaxLines: 1,
+        hintText: 'Movie, Actors, Directors...',
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: moviesSearchTextColor,
+            width: 2,
+          ),
+        ),
         hintStyle: TextStyle(
           color: moviesSearchTextColor,
-          fontSize: 25,
+          fontSize: 27,
         ),
       ),
     );

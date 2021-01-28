@@ -12,6 +12,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = appHeight(context);
     double width = appWidth(context);
+    var textController = TextEditingController();
+
     return Scaffold(
       backgroundColor: moviesBackgroundColor,
       body: Padding(
@@ -24,6 +26,13 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MHeadingText('Search'),
+                Padding(
+                  padding:
+                      EdgeInsets.only(top: height * 0.02, right: height * 0.05),
+                  child: MSearchBar(textController),
+                ),
+                MHeightBox(height * 0.02),
+                MRecentMoviesList(height: height * 0.3, width: width,),
               ],
             ),
           ),
