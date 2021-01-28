@@ -17,4 +17,9 @@ class ProductionCompany {
     this.logoPath,
     this.originCountry,
   });
+
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCompanyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductionCompanyToJson(this);
 }
