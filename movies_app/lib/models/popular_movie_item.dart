@@ -1,10 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'recent_movie_item.g.dart';
+part 'popular_movie_item.g.dart';
 
 @JsonSerializable()
-class RecentMovieItem {
+class PopularMovieItem {
   @JsonKey(name: 'poster_path')
   String posterPath;
   bool adult;
@@ -28,7 +27,7 @@ class RecentMovieItem {
   @JsonKey(name: 'vote_average')
   num voteAverage;
 
-  RecentMovieItem({
+  PopularMovieItem({
     this.posterPath,
     this.adult,
     this.overview,
@@ -45,8 +44,8 @@ class RecentMovieItem {
     this.voteAverage,
   });
 
-  factory RecentMovieItem.fromJson(Map<String, dynamic> json) =>
-      _$RecentMovieItemFromJson(json);
+  factory PopularMovieItem.fromJson(Map<String, dynamic> json) =>
+      _$PopularMovieItemFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RecentMovieItemToJson(this);
+  Map<String, dynamic> toJson() => _$PopularMovieItemToJson(this);
 }

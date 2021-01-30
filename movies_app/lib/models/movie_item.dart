@@ -29,6 +29,9 @@ class MovieItem {
   int runtime;
   @JsonKey(name: 'spoken_languages')
   List<SpokenLanguage> spokenLanguages;
+  String status;
+  String tagline;
+  bool video;
   @JsonKey(name: 'vote_average')
   num voteAverage;
   @JsonKey(name: 'vote_count')
@@ -42,9 +45,17 @@ class MovieItem {
   List<Genre> genres;
 
   MovieItem({
+    this.adult,
+    this.backdropPath,
+    this.belongsToCollection,
+    this.budget,
+    this.homePage,
     this.id,
-    this.title,
-    this.runtime,
+    this.imdbId,
+    this.originalLanguage,
+    this.status,
+    this.tagline,
+    this.video,
     this.voteAverage,
     this.voteCount,
     this.posterPath,
@@ -53,7 +64,8 @@ class MovieItem {
     this.genres,
   });
 
-  factory MovieItem.fromJson(Map<String, dynamic> json) => _$MovieItemFromJson(json);
+  factory MovieItem.fromJson(Map<String, dynamic> json) =>
+      _$MovieItemFromJson(json);
 
-  Map<String, dynamic> toJson() => _MovieItemToJson(this);
+  Map<String, dynamic> toJson() => _$MovieItemToJson(this);
 }

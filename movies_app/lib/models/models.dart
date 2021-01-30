@@ -1,4 +1,13 @@
-export 'movie_item.dart';
-export 'recent_movie_item.dart';
-export 'production_company.dart';
 export 'genre.dart';
+export 'movie_item.dart';
+export 'production_company.dart';
+export 'production_country.dart';
+export 'recent_movie_item.dart';
+export 'spoken_language.dart';
+export 'recent_movies_list.dart';
+export 'dates.dart';
+export 'popular_movies_list.dart';
+export 'popular_movie_item.dart';
+export 'get_details_error.dart';
+export 'now_playing_error.dart';
+export 'popular_error.dart';
