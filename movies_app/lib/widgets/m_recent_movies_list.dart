@@ -10,7 +10,7 @@ class MRecentMoviesList extends StatelessWidget {
   MRecentMoviesList({
     @required this.height,
     @required this.width,
-    this.recentMovieItems,
+    this.recentMovieItems = const [],
   });
 
   @override
@@ -25,19 +25,25 @@ class MRecentMoviesList extends StatelessWidget {
             height: height,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount:
+                  recentMovieItems.length <= 0 ? 10 : recentMovieItems.length,
+
               itemBuilder: (context, index) {
-                // return MRecentMovieItem(
-                //   height: height * 0.68,
-                //   width: width * 25,
-                //   recentMovieItem: recentMovieItems[index],
-                // );
-                return Text(
-                  'data',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                );
+                return recentMovieItems.length > 0
+                    ? Padding(
+                      padding: EdgeInsets.only(right: width * 0.03),
+                      child: MRecentMovieItem(
+                          height: height,
+                          width: width * 0.27,
+                          recentMovieItem: recentMovieItems[index],
+                        ),
+                    )
+                    : Text(
+                        'data',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      );
               },
             ),
           ),

@@ -15,30 +15,33 @@ class MRecentMovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      color: Colors.transparent,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Hero(
-            tag: recentMovieItem.title,
-            child: Container(
-              height: height * 0.7,
-              width: width,
-              child: Image.network(
-                recentMovieItem.posterPath,
-                fit: BoxFit.contain,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: height,
+        color: Colors.transparent,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Hero(
+              tag: recentMovieItem.title,
+              child: Container(
+                height: height * 0.8,
+                width: width,
+                child: Image.network(
+                  recentMovieItem.posterPath,
+                  width: width,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-          ),
-          MHeightBox(height * 0.05),
-          Padding(
-            padding: EdgeInsets.only(right: width * 0.3),
-            child: MMovieItemTitleText(recentMovieItem.title),
-          ),
-        ],
+            MHeightBox(height * 0.05),
+            Padding(
+              padding: EdgeInsets.only(right: width * 0.25),
+              child: MMovieItemTitleText(recentMovieItem.title),
+            ),
+          ],
+        ),
       ),
     );
   }
