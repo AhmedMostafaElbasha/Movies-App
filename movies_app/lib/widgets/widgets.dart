@@ -6,3 +6,8 @@ export 'm_width_box.dart';
 export 'm_search_bar.dart';
 export 'm_see_more_button.dart';
 export 'm_recent_movies_list.dart';
+export 'm_recent_movie_item.dart';
+export 'm_movie_item_title_text.dart';
+export 'm_list_title_bar.dart';
+export 'm_popular_movies_list.dart';
+export 'm_popular_movie_item.dart';

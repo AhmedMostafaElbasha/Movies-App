@@ -31,8 +31,23 @@ class HomePage extends StatelessWidget {
                       EdgeInsets.only(top: height * 0.02, right: height * 0.05),
                   child: MSearchBar(textController),
                 ),
-                MHeightBox(height * 0.02),
-                MRecentMoviesList(height: height * 0.3, width: width,),
+                MHeightBox(height * 0.07),
+                MListTitleBar(
+                  width: width,
+                  title: 'Recent',
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: height * 0.05),
+                  child: MRecentMoviesList(
+                    height: height * 0.2,
+                    width: width,
+                  ),
+                ),
+                MHeightBox(height * 0.07),
+                MListTitleBar(
+                  width: width,
+                  title: 'Popular',
+                ),
               ],
             ),
           ),

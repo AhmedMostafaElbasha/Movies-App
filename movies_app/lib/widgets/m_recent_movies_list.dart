@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'widgets.dart';
+import '../models/models.dart';
 
 class MRecentMoviesList extends StatelessWidget {
   final double height;
   final double width;
+  final List<RecentMovieItem> recentMovieItems;
 
   MRecentMoviesList({
     @required this.height,
     @required this.width,
+    this.recentMovieItems,
   });
 
   @override
@@ -18,35 +21,24 @@ class MRecentMoviesList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(right: width * 0.05),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MSubHeadingText('Recent'),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: MSeeMoreButton(),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: height * 0.1),
-            child: Container(
-              height: height * 0.7,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Text(
-                    'data',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  );
-                },
-              ),
+          Container(
+            height: height,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                // return MRecentMovieItem(
+                //   height: height * 0.68,
+                //   width: width * 25,
+                //   recentMovieItem: recentMovieItems[index],
+                // );
+                return Text(
+                  'data',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                );
+              },
             ),
           ),
         ],
