@@ -1,42 +1,37 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'widgets.dart';
 import '../models/models.dart';
 
 class MPopularMoviesList extends StatelessWidget {
   final double height;
   final double width;
-  final List<PopularMovieItem> popularMovieItems;
+  final List<PopularMovieItem> popularMoviesItems;
 
   MPopularMoviesList({
     @required this.height,
     @required this.width,
-    this.popularMovieItems = const [],
+    this.popularMoviesItems,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
       width: width,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            height: height,
             child: ListView.builder(
-              itemCount:
-                  popularMovieItems.length == 0 ? 10 : popularMovieItems.length,
+              itemCount: popularMoviesItems.length,
               itemBuilder: (context, index) {
-                return popularMovieItems.length > 0
-                    ? null
-                    : Text(
-                        'data',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      );
+                return MPopularMovieItem(
+                  height: height * .4,
+                  width: width,
+                  popularMovieItem: popularMoviesItems[index],
+                );
               },
             ),
-          ),
+          )
         ],
       ),
     );

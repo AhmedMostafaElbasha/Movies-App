@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:movies_app/models/models.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/blocs.dart';
 import '../constants/constants.dart';
 import '../utilities/utilities.dart';
 import '../widgets/widgets.dart';
@@ -32,38 +32,64 @@ class HomePage extends StatelessWidget {
                       EdgeInsets.only(top: height * 0.02, right: height * 0.05),
                   child: MSearchBar(textController),
                 ),
-                MHeightBox(height * 0.05),
+                MHeightBox(height * 0.03),
                 MListTitleBar(
                   width: width,
                   title: 'Recent',
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: height * 0.02),
-                  child: MRecentMoviesList(
-                    height: height * 0.3,
-                    width: width,
-                    recentMovieItems: [
-                      RecentMovieItem(
-                        posterPath:
-                            'https://upload.wikimedia.org/wikipedia/ar/0/0e/Sm2_peter_onesheet.jpg',
-                        title: 'Spider Man 2',
-                      ),
-                      RecentMovieItem(
-                        posterPath: 'https://upload.wikimedia.org/wikipedia/ar/0/0e/Sm2_peter_onesheet.jpg',
-                        title: 'The Amazing Spider Man',
-                      ),RecentMovieItem(
-                        posterPath:
-                        'https://cdn.dribbble.com/users/1968881/screenshots/4636369/attachments/1047684/daily_ui_movie_app_3.png',
-                        title: 'Spider Man 2',
-                      ),
-                    ],
+                  padding: EdgeInsets.only(top: height * 0.04),
+                  child: BlocBuilder<RecentMoviesBloc, RecentMoviesState>(
+                    builder: (context, state) {
+                      if (state is RecentMoviesLoadInProgress) {
+                        return MLoadingState();
+                      }
+
+                      if (state is RecentMoviesLoadSuccess) {
+                        return MRecentMoviesList(
+                          height: height * 0.28,
+                          width: width,
+                          recentMovieItems: state.recentMovies,
+                        );
+                      }
+
+                      if (state is RecentMoviesLoadFailure) {
+                        return MErrorState(state.error);
+                      }
+
+                      return Container();
+                    },
                   ),
                 ),
-                MHeightBox(height * 0.02),
+                MHeightBox(height * 0.04),
                 MListTitleBar(
                   width: width,
                   title: 'Popular',
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: height * 0.02),
+                  child: BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
+                    builder: (context, state) {
+                      if (state is PopularMoviesLoadInProgress) {
+                        return MLoadingState();
+                      }
+
+                      if (state is PopularMoviesLoadSuccess) {
+                        return MPopularMoviesList(
+                          height: height * 0.4,
+                          width: width,
+                          popularMoviesItems: state.popularMovies,
+                        );
+                      }
+
+                      if (state is PopularMoviesLoadFailure) {
+                        return MErrorState(state.error);
+                      }
+
+                      return Container();
+                    },
+                  ),
+                )
               ],
             ),
           ),

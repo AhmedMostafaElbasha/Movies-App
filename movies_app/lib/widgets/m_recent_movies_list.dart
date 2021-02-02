@@ -16,7 +16,6 @@ class MRecentMoviesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,
       width: width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,25 +24,16 @@ class MRecentMoviesList extends StatelessWidget {
             height: height,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount:
-                  recentMovieItems.length <= 0 ? 10 : recentMovieItems.length,
-
+              itemCount: recentMovieItems.length,
               itemBuilder: (context, index) {
-                return recentMovieItems.length > 0
-                    ? Padding(
-                      padding: EdgeInsets.only(right: width * 0.03),
-                      child: MRecentMovieItem(
-                          height: height,
-                          width: width * 0.27,
-                          recentMovieItem: recentMovieItems[index],
-                        ),
-                    )
-                    : Text(
-                        'data',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      );
+                return Padding(
+                  padding: EdgeInsets.only(right: width * 0.05),
+                  child: MRecentMovieItem(
+                    height: height,
+                    width: width * 0.3,
+                    recentMovieItem: recentMovieItems[index],
+                  ),
+                );
               },
             ),
           ),

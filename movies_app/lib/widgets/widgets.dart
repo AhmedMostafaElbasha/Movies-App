@@ -11,3 +11,6 @@ export 'm_movie_item_title_text.dart';
 export 'm_list_title_bar.dart';
 export 'm_popular_movies_list.dart';
 export 'm_popular_movie_item.dart';
+export 'm_details_text.dart';
+export 'm_error_state.dart';
+export 'm_loading_state.dart';
