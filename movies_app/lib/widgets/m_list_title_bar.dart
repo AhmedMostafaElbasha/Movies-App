@@ -18,12 +18,16 @@ class MListTitleBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MSubHeadingText(title),
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: MSeeMoreButton(),
-          ),
+          _buildSeeMoreButton(),
         ],
       ),
+    );
+  }
+
+  Widget _buildSeeMoreButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0),
+      child: MSeeMoreButton(),
     );
   }
 }

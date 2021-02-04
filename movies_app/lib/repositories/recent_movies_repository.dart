@@ -6,8 +6,6 @@ import '../constants/constants.dart';
 import '../models/models.dart';
 
 class RecentMoviesRepository {
-  RecentMoviesRepository();
-
   Future<List<RecentMovieItem>> getRecentMovies() async {
     final response = await http.get(
         'https://api.themoviedb.org/3/movie/now_playing?api_key=$apIKey&language=en-US&page=1');

@@ -11,25 +11,33 @@ class MErrorState extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Icon(
-              Icons.error,
-              size: 40,
-              color: moviesRatingIconColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0),
-            child: Text(
-              errorMessage,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-              ),
-            ),
-          ),
+          _buildErrorIcon(),
+          _buildErrorMessage(errorMessage),
         ],
+      ),
+    );
+  }
+
+  Widget _buildErrorIcon() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Icon(
+        Icons.error,
+        size: 40,
+        color: moviesRatingIconColor,
+      ),
+    );
+  }
+
+  Widget _buildErrorMessage(String errorMessage) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40.0),
+      child: Text(
+        errorMessage,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16.0,
+        ),
       ),
     );
   }

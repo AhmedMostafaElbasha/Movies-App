@@ -3,8 +3,6 @@ import 'package:meta/meta.dart';
 import '../../models/models.dart';
 
 abstract class MovieDetailsState extends Equatable {
-  MovieDetailsState();
-
   @override
   List<Object> get props => [];
 }

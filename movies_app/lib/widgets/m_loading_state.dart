@@ -6,21 +6,29 @@ class MLoadingState extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: CircularProgressIndicator(),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0),
-            child: Text(
-              'Movies is being loaded. Please wait...',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-              ),
-            ),
-          ),
+          _buildCircularProgressIndicator(),
+          _buildPleaseWaitStatement(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCircularProgressIndicator() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _buildPleaseWaitStatement() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40.0),
+      child: Text(
+        'Movies is being loaded. Please wait...',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16.0,
+        ),
       ),
     );
   }

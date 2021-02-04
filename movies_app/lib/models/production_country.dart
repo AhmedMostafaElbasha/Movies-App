@@ -8,9 +8,13 @@ class ProductionCountry {
   String iso31661;
   String name;
 
-  ProductionCountry({this.iso31661, this.name,});
+  ProductionCountry({
+    this.iso31661,
+    this.name,
+  });
 
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) => _$ProductionCountryFromJson(json);
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCountryFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductionCountryToJson(this);
 }

@@ -6,8 +6,6 @@ import '../constants/constants.dart';
 import '../models/models.dart';
 
 class PopularMoviesRepository {
-  PopularMoviesRepository();
-
   Future<List<PopularMovieItem>> getPopularMovies() async {
     final response = await http.get(
         'https://api.themoviedb.org/3/movie/popular?api_key=$apIKey&language=en-US&page=1');
