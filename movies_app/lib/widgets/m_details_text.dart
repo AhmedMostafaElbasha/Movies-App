@@ -11,7 +11,7 @@ class MDetailsText extends StatelessWidget {
       value,
       style: TextStyle(
         color: Colors.white54,
-        fontSize: 7.0,
+        fontSize: 14.0,
       ),
     );
   }

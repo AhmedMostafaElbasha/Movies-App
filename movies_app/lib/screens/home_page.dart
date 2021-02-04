@@ -15,82 +15,99 @@ class HomePage extends StatelessWidget {
     double width = appWidth(context);
     var textController = TextEditingController();
 
-    return Scaffold(
-      backgroundColor: moviesBackgroundColor,
-      body: Padding(
-        padding: EdgeInsets.only(left: width * 0.05, top: height * 0.08),
-        child: Container(
-          height: height,
-          width: width,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MHeadingText('Search'),
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: height * 0.02, right: height * 0.05),
-                  child: MSearchBar(textController),
-                ),
-                MHeightBox(height * 0.03),
-                MListTitleBar(
-                  width: width,
-                  title: 'Recent',
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: height * 0.04),
-                  child: BlocBuilder<RecentMoviesBloc, RecentMoviesState>(
-                    builder: (context, state) {
-                      if (state is RecentMoviesLoadInProgress) {
-                        return MLoadingState();
-                      }
-
-                      if (state is RecentMoviesLoadSuccess) {
-                        return MRecentMoviesList(
-                          height: height * 0.28,
-                          width: width,
-                          recentMovieItems: state.recentMovies,
-                        );
-                      }
-
-                      if (state is RecentMoviesLoadFailure) {
-                        return MErrorState(state.error);
-                      }
-
-                      return Container();
-                    },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RecentMoviesBloc>(
+          create: (context) => RecentMoviesBloc()..add(RecentMoviesFetched()),
+        ),
+        BlocProvider<PopularMoviesBloc>(
+          create: (context) => PopularMoviesBloc()..add(PopularMoviesFetched()),
+        ),
+      ],
+      child: Scaffold(
+        backgroundColor: moviesBackgroundColor,
+        body: Padding(
+          padding: EdgeInsets.only(left: width * 0.05, top: height * 0.08),
+          child: Container(
+            height: height,
+            width: width,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MHeadingText('Search'),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: height * 0.02, right: height * 0.05),
+                    child: MSearchBar(textController),
                   ),
-                ),
-                MHeightBox(height * 0.04),
-                MListTitleBar(
-                  width: width,
-                  title: 'Popular',
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: height * 0.02),
-                  child: BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
-                    builder: (context, state) {
-                      if (state is PopularMoviesLoadInProgress) {
-                        return MLoadingState();
-                      }
-
-                      if (state is PopularMoviesLoadSuccess) {
-                        return MPopularMoviesList(
-                          height: height * 0.4,
-                          width: width,
-                          popularMoviesItems: state.popularMovies,
-                        );
-                      }
-
-                      if (state is PopularMoviesLoadFailure) {
-                        return MErrorState(state.error);
-                      }
-
-                      return Container();
-                    },
+                  MHeightBox(height * 0.03),
+                  MListTitleBar(
+                    width: width,
+                    title: 'Recent',
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(top: height * 0.04),
+                    child: Container(
+                      height: height * 0.32,
+                      width: width,
+                      child: BlocBuilder<RecentMoviesBloc, RecentMoviesState>(
+                        builder: (context, state) {
+                          if (state is RecentMoviesLoadInProgress) {
+                            return MLoadingState();
+                          }
+                          if (state is RecentMoviesLoadSuccess) {
+                            return MRecentMoviesList(
+                              height: height * 0.32,
+                              width: width,
+                              recentMovieItems: state.recentMovies,
+                            );
+                          }
+
+                          if (state is RecentMoviesLoadFailure) {
+                            return MErrorState(state.error);
+                          }
+
+                          return Container();
+                        },
+                      ),
+                    ),
+                  ),
+                  MHeightBox(height * 0.04),
+                  MListTitleBar(
+                    width: width,
+                    title: 'Popular',
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: height * 0.02),
+                    child: Container(
+                      height: height * 0.41,
+                      width: width,
+                      child: BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
+                        builder: (context, state) {
+                          if (state is PopularMoviesLoadInProgress) {
+                            return MLoadingState();
+                          }
+
+                          if (state is PopularMoviesLoadSuccess) {
+                            return MPopularMoviesList(
+                              height: height * 0.4,
+                              width: width,
+                              popularMoviesItems: state.popularMovies,
+                            );
+                          }
+
+                          if (state is PopularMoviesLoadFailure) {
+                            return MErrorState(state.error);
+                          }
+
+                          return Container();
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

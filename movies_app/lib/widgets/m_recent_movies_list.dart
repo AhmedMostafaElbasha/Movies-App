@@ -30,7 +30,7 @@ class MRecentMoviesList extends StatelessWidget {
                   padding: EdgeInsets.only(right: width * 0.05),
                   child: MRecentMovieItem(
                     height: height,
-                    width: width * 0.3,
+                    width: width * 0.35,
                     recentMovieItem: recentMovieItems[index],
                   ),
                 );

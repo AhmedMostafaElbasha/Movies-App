@@ -14,3 +14,4 @@ export 'm_popular_movie_item.dart';
 export 'm_details_text.dart';
 export 'm_error_state.dart';
 export 'm_loading_state.dart';
+export 'm_custom_divider.dart';

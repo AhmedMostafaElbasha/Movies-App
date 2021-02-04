@@ -24,10 +24,13 @@ class MPopularMoviesList extends StatelessWidget {
             child: ListView.builder(
               itemCount: popularMoviesItems.length,
               itemBuilder: (context, index) {
-                return MPopularMovieItem(
-                  height: height * .4,
-                  width: width,
-                  popularMovieItem: popularMoviesItems[index],
+                return Padding(
+                  padding: EdgeInsets.only(top: height * 0.05),
+                  child: MPopularMovieItem(
+                    height: height * .57,
+                    width: width,
+                    popularMovieItem: popularMoviesItems[index],
+                  ),
                 );
               },
             ),

@@ -8,24 +8,28 @@ class MErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            Icon(
+    return Center(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Icon(
               Icons.error,
               size: 40,
               color: moviesRatingIconColor,
             ),
-            Text(
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: Text(
               errorMessage,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16.0,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
