@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/constants/colors.dart';
+import '../constants/constants.dart';
 
 class MMovieItemTitleText extends StatelessWidget {
   final String value;

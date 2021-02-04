@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/blocs/movie_details/movie_details.dart';
-import 'package:movies_app/constants/arguments.dart';
-import 'package:movies_app/constants/colors.dart';
-import 'package:movies_app/screens/screens.dart';
-import 'package:movies_app/widgets/m_details_text.dart';
-import 'widgets.dart';
+import '../blocs/blocs.dart';
+import '../screens/screens.dart';
+import '../widgets/widgets.dart';
 import '../models/models.dart';
 import '../constants/constants.dart';
 

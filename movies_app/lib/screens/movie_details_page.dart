@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/widgets/widgets.dart';
+import '../widgets/widgets.dart';
 import '../models/models.dart';
-import '../screens/screens.dart';
 import '../constants/constants.dart';
 import '../utilities/utilities.dart';
 

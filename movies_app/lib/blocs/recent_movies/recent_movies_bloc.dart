@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
 import '../../utilities/utilities.dart';
-import './recent_movies.dart';
+import '../recent_movies/recent_movies.dart';
 
 class RecentMoviesBloc extends Bloc<RecentMoviesEvent, RecentMoviesState> {
   final recentMoviesRepository = RecentMoviesRepository();

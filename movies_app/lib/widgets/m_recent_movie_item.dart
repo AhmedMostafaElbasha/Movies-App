@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/constants/arguments.dart';
-import 'package:movies_app/screens/screens.dart';
+import '../screens/screens.dart';
 import '../blocs/blocs.dart';
 import '../models/models.dart';
 import '../constants/constants.dart';
-import './widgets.dart';
+import '../widgets/widgets.dart';
 
 class MRecentMovieItem extends StatelessWidget {
   final double height;

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'models.dart';
+import '../models/models.dart';
 
 part 'popular_movies_list.g.dart';
 

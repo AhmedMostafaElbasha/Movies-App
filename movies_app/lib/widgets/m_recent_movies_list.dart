@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets.dart';
+import '../widgets/widgets.dart';
 import '../models/models.dart';
 
 class MRecentMoviesList extends StatelessWidget {

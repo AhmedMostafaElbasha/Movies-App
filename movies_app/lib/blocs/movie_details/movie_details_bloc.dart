@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
 import '../../utilities/utilities.dart';
-import 'movie_details.dart';
+import '../movie_details/movie_details.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   var movieDetailsRepository = MovieDetailsRepository();
