@@ -1,5 +1,7 @@
+// Package Imports
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// Inner Imports
 import '../screens/screens.dart';
 import '../blocs/blocs.dart';
 import '../models/models.dart';
@@ -26,13 +28,7 @@ class MRecentMovieItem extends StatelessWidget {
       child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
         builder: (context, state) {
           if (state is MovieDetailsLoadInProgress) {
-            return Container(
-              height: height,
-              width: width,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            return _buildLoadingStateDisplay();
           }
 
           if (state is MovieDetailsLoadSuccess) {
@@ -53,24 +49,9 @@ class MRecentMovieItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Hero(
-                      tag: '${state.movieItem.title}recent',
-                      child: Container(
-                        height: height * 0.8,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: Image.network(
-                            _buildMoviePosterPath(state.movieItem.posterPath),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
+                    _buildMoviePosterImageDisplay(state),
                     MHeightBox(height * 0.05),
-                    Padding(
-                      padding: EdgeInsets.only(right: 15.0),
-                      child: MMovieItemTitleText(state.movieItem.title, 18.0),
-                    ),
+                    _buildMovieTitleDisplay(state),
                   ],
                 ),
               ),
@@ -78,21 +59,58 @@ class MRecentMovieItem extends StatelessWidget {
           }
 
           if (state is MovieDetailsLoadFailure) {
-            return Container(
-              height: height,
-              width: width,
-              child: Center(
-                child: Icon(
-                  Icons.error,
-                  size: 40.0,
-                  color: moviesRatingIconColor,
-                ),
-              ),
-            );
+            return _buildErrorStateDisplay();
           }
 
           return Container();
         },
+      ),
+    );
+  }
+
+  Container _buildErrorStateDisplay() {
+    return Container(
+      height: height,
+      width: width,
+      child: Center(
+        child: Icon(
+          Icons.error,
+          size: 40.0,
+          color: moviesRatingIconColor,
+        ),
+      ),
+    );
+  }
+
+  Container _buildLoadingStateDisplay() {
+    return Container(
+      height: height,
+      width: width,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  Padding _buildMovieTitleDisplay(MovieDetailsLoadSuccess state) {
+    return Padding(
+      padding: EdgeInsets.only(right: 15.0),
+      child: MMovieItemTitleText(state.movieItem.title, 18.0),
+    );
+  }
+
+  Hero _buildMoviePosterImageDisplay(MovieDetailsLoadSuccess state) {
+    return Hero(
+      tag: '${state.movieItem.title}recent',
+      child: Container(
+        height: height * 0.8,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12.0),
+          child: Image.network(
+            _buildMoviePosterPath(state.movieItem.posterPath),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }

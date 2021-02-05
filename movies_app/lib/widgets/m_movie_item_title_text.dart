@@ -1,4 +1,6 @@
+// Package Imports
 import 'package:flutter/material.dart';
+// Inner Imports
 import '../constants/constants.dart';
 
 class MMovieItemTitleText extends StatelessWidget {

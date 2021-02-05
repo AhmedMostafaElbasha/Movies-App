@@ -1,4 +1,6 @@
+// Package Imports
 import 'package:equatable/equatable.dart';
+// Inner Imports
 import '../../models/models.dart';
 
 abstract class RecentMoviesState extends Equatable {

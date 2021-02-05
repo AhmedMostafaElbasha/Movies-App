@@ -1,5 +1,10 @@
+// Package Imports
 import 'package:flutter/material.dart';
 
+/*
+MDetailsText
+A customized Text Widget to display details
+*/
 class MDetailsText extends StatelessWidget {
   final String value;
 

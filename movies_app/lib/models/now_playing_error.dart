@@ -1,3 +1,4 @@
+// Package Imports
 import 'package:json_annotation/json_annotation.dart';
 
 part 'now_playing_error.g.dart';

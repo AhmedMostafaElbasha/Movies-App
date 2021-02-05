@@ -1,9 +1,15 @@
+// Package Imports
 import 'package:bloc/bloc.dart';
+// Inner Imports
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
 import '../../utilities/utilities.dart';
 import '../recent_movies/recent_movies.dart';
 
+/*
+RecentMoviesBloc
+This Bloc is responsable for handling displaying recent movies list.
+*/
 class RecentMoviesBloc extends Bloc<RecentMoviesEvent, RecentMoviesState> {
   final recentMoviesRepository = RecentMoviesRepository();
   List<RecentMovieItem> recentMovies;

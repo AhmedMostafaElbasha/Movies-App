@@ -1,10 +1,16 @@
+// Dart Imports
 import 'dart:async';
 import 'dart:convert';
-
+// Package Imports
 import 'package:http/http.dart' as http;
+// Inner Imports
 import '../constants/constants.dart';
 import '../models/models.dart';
 
+/*
+MovieDetailsRepository
+This class is responsable for getting movie details
+*/
 class MovieDetailsRepository {
   Future<MovieItem> getMovieDetails(int movieId) async {
     final response = await http.get(

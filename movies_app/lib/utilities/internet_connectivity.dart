@@ -1,5 +1,7 @@
+// Dart Imports
 import 'dart:io';
 
+// A function that tests if wether there is an internet connectivity or not.
 Future<bool> isInternetConnected() async {
   try {
     final result = await InternetAddress.lookup('google.com');

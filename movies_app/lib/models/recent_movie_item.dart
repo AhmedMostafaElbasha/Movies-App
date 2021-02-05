@@ -1,3 +1,4 @@
+// Package Imports
 import 'package:json_annotation/json_annotation.dart';
 
 part 'recent_movie_item.g.dart';

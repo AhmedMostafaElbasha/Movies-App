@@ -1,9 +1,15 @@
+// Package Imports
 import 'package:bloc/bloc.dart';
+// Inner Imports
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
 import '../../utilities/utilities.dart';
 import '../popular_movies/popular_movies.dart';
 
+/*
+PopularMoviesBloc:
+This Bloc is responsable for showing popular movies list. 
+*/
 class PopularMoviesBloc extends Bloc<PopularMoviesEvent, PopularMoviesState> {
   final _popularMoviesRepository = PopularMoviesRepository();
   List<PopularMovieItem> popularMovies;

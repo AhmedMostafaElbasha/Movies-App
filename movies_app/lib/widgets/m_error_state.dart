@@ -1,6 +1,12 @@
+// Package Imports
 import 'package:flutter/material.dart';
+// Inner Imports
 import '../constants/constants.dart';
 
+/*
+MErrorState
+A state that gets displayed to user to indicate to an error.
+ */
 class MErrorState extends StatelessWidget {
   final String errorMessage;
 

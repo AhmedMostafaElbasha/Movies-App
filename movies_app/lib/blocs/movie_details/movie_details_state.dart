@@ -1,5 +1,7 @@
+// Package Imports
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+// Inner Imports
 import '../../models/models.dart';
 
 abstract class MovieDetailsState extends Equatable {

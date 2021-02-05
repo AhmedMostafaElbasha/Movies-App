@@ -1,4 +1,6 @@
+// Package Imports
 import 'package:json_annotation/json_annotation.dart';
+// Inner Imports
 import '../models/models.dart';
 
 part 'movie_item.g.dart';

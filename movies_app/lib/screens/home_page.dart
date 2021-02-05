@@ -1,11 +1,16 @@
+// Package Imports
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+// Inner Imports
 import '../blocs/blocs.dart';
 import '../constants/constants.dart';
 import '../utilities/utilities.dart';
 import '../widgets/widgets.dart';
 
+/*
+HomePage:
+This is the home page of the app
+ */
 class HomePage extends StatelessWidget {
   static const routeName = '/home_page';
 

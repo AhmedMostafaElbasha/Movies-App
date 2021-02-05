@@ -1,3 +1,4 @@
+// Package Imports
 import 'package:flutter/material.dart';
 
 const moviesBackgroundColor = Color.fromRGBO(29, 29, 39, 1.0);

@@ -1,9 +1,15 @@
+// Package Imports
 import 'package:flutter/material.dart';
+// Inner Imports
 import '../widgets/widgets.dart';
 import '../models/models.dart';
 import '../constants/constants.dart';
 import '../utilities/utilities.dart';
 
+/*
+MovieDetailsPage
+This is the movie details info page of the app.
+ */
 class MovieDetailsPage extends StatelessWidget {
   static const routeName = '/movie_details_page';
 
@@ -275,22 +281,11 @@ class MovieDetailsPage extends StatelessWidget {
       child: Column(
         children: [
           MHeightBox(04.0),
-          Icon(
-            Icons.star,
-            color: moviesRatingIconColor,
-            size: 34,
-          ),
+          _buildRatingIconDisplay(),
           MHeightBox(04.0),
           Row(
             children: [
-              Text(
-                rateAverage.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26.0,
-                ),
-              ),
+              _buildVoteAverageValueDisplay(rateAverage),
               Padding(
                 padding: const EdgeInsets.only(top: 2.0),
                 child: Text(
@@ -302,21 +297,44 @@ class MovieDetailsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 6.0),
-                child: Text(
-                  '10',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ),
+              _buildMaximumAverageValueDisplay(),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Padding _buildMaximumAverageValueDisplay() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6.0),
+      child: Text(
+        '10',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
+        ),
+      ),
+    );
+  }
+
+  Text _buildVoteAverageValueDisplay(num rateAverage) {
+    return Text(
+      rateAverage.toString(),
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 26.0,
+      ),
+    );
+  }
+
+  Icon _buildRatingIconDisplay() {
+    return Icon(
+      Icons.star,
+      color: moviesRatingIconColor,
+      size: 34,
     );
   }
 

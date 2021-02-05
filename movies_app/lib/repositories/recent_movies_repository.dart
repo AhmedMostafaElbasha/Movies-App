@@ -1,10 +1,16 @@
+// Dart Imports
 import 'dart:async';
 import 'dart:convert';
-
+// Package Imports
 import 'package:http/http.dart' as http;
+// Inner Imports
 import '../constants/constants.dart';
 import '../models/models.dart';
 
+/*
+RecentMoviesRepository
+This class is responsable for getting recent movies list
+*/
 class RecentMoviesRepository {
   Future<List<RecentMovieItem>> getRecentMovies() async {
     final response = await http.get(

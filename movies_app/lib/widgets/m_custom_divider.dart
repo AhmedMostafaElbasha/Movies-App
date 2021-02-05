@@ -1,5 +1,10 @@
+// Package Imports
 import 'package:flutter/material.dart';
 
+/*
+MCustomDivider
+A customized Divider Widget
+*/
 class MCustomDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
