@@ -11,3 +11,7 @@ export 'popular_movie_item.dart';
 export 'get_details_error.dart';
 export 'now_playing_error.dart';
 export 'popular_error.dart';
+export 'get_images_response.dart';
+export 'backdrop.dart';
+export 'poster.dart';
+export 'get_details_error.dart';

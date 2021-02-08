@@ -81,7 +81,7 @@ Widget _buildRecentMooviesList(double height, double width) {
       Padding(
         padding: EdgeInsets.only(top: height * 0.04),
         child: Container(
-          height: height * 0.32,
+          height: height * 0.34,
           width: width,
           child: BlocBuilder<RecentMoviesBloc, RecentMoviesState>(
             builder: (context, state) {
@@ -90,7 +90,7 @@ Widget _buildRecentMooviesList(double height, double width) {
               }
               if (state is RecentMoviesLoadSuccess) {
                 return MRecentMoviesList(
-                  height: height * 0.32,
+                  height: height * 0.34,
                   width: width,
                   recentMovieItems: state.recentMovies,
                 );
@@ -120,7 +120,7 @@ Widget _buildPopularMoviesList(double height, double width) {
       Padding(
         padding: EdgeInsets.only(top: height * 0.02),
         child: Container(
-          height: height * 0.41,
+          height: height * 0.43,
           width: width,
           child: BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
             builder: (context, state) {

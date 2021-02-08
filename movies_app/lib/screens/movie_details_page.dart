@@ -1,10 +1,12 @@
 // Package Imports
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // Inner Imports
 import '../widgets/widgets.dart';
 import '../models/models.dart';
 import '../constants/constants.dart';
 import '../utilities/utilities.dart';
+import '../blocs/blocs.dart';
 
 /*
 MovieDetailsPage
@@ -21,25 +23,26 @@ class MovieDetailsPage extends StatelessWidget {
     Arguments arguments = ModalRoute.of(context).settings.arguments;
     String heroTag = arguments.heroTag;
     MovieItem movieItem = arguments.movieItem;
+    print(movieItem.id);
 
-    return Scaffold(
-      backgroundColor: moviesBackgroundColor,
-      body: Stack(
-        children: [
-          _buildMoviePosterImageDisplay(
-            heroTag,
-            height,
-            width,
-            movieItem.posterPath,
-          ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: _buildCustomAppBar(),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              height: height,
-              width: width,
+    return BlocProvider<MovieImagesBloc>(
+      create: (context) =>
+          MovieImagesBloc()..add(MovieImageFetched(movieId: movieItem.id)),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: moviesBackgroundColor,
+        body: Stack(
+          children: [
+            _buildMoviePosterImageDisplay(
+              heroTag,
+              height,
+              width,
+              movieItem.posterPath,
+            ),
+            _buildCustomAppBar(),
+            Container(
+              // height: height,
+              // width: width,
               color: Colors.black12,
               child: _buildMovieInfoContainer(
                 height,
@@ -48,8 +51,8 @@ class MovieDetailsPage extends StatelessWidget {
                 movieItem,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -75,7 +78,7 @@ class MovieDetailsPage extends StatelessWidget {
     return Hero(
       tag: heroTag,
       child: Container(
-        height: height * .5,
+        height: height * .48,
         width: width,
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -128,42 +131,54 @@ class MovieDetailsPage extends StatelessWidget {
   ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.04),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          MHeightBox(height * 0.24),
-          Column(
-            children: [
-              Row(
-                children: [
-                  _buildMovieTitleDisplay(
-                    width,
-                    movieItem.title,
-                  ),
-                  _buildMovieReleaseYearDisplay(
-                    movieItem.releaseDate,
-                  ),
-                ],
-              ),
-              _buildGenreDisplayList(
-                movieItem.genres,
-                context,
-              ),
-            ],
-          ),
-          MHeightBox(height * 0.03),
-          _buildMovieRateRatioBar(
-            movieItem.popularity,
-            movieItem.voteAverage,
-            height,
-            width,
-          ),
-          _buildSynopsisInfoDisplay(
-            movieItem.overview,
-          ),
-          _buildPhotoGalleryInfoDisplay(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MHeightBox(height * 0.39),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    _buildMovieTitleDisplay(
+                      width,
+                      movieItem.title,
+                    ),
+                    _buildMovieReleaseYearDisplay(
+                      movieItem.releaseDate,
+                    ),
+                  ],
+                ),
+                _buildGenreDisplayList(
+                  movieItem.genres,
+                  context,
+                ),
+              ],
+            ),
+            MHeightBox(height * 0.03),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildMovieRateRatioBar(
+                  movieItem.popularity,
+                  movieItem.voteAverage,
+                  height,
+                  width,
+                ),
+                _buildSynopsisInfoDisplay(
+                  movieItem.overview,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: MCustomDivider(),
+                ),
+                MSubHeadingText('Photogallery'),
+                _buildPhotoGalleryInfoDisplay(height * 0.12, width),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -420,17 +435,77 @@ class MovieDetailsPage extends StatelessWidget {
 
   // Movie PhotoGallery Display
 
-  Widget _buildPhotoGalleryInfoDisplay() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: MCustomDivider(),
-        ),
-        MSubHeadingText('Photogallery'),
-      ],
+  Widget _buildPhotoGalleryInfoDisplay(double height, double width) {
+    return Container(
+      height: height,
+      child: ListView(
+        children: [
+          BlocBuilder<MovieImagesBloc, MovieImagesState>(
+            builder: (context, state) {
+              if (state is MovieImagesLoadInProgress) {
+                return _buildLoadingStateDisplay(height, width);
+              }
+
+              if (state is MovieImagesLoadSuccess) {
+                return ListView(
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: height * 0.03),
+                      child: state.getImagesResponse.posters.length == 0
+                          ? MEmptyState('posters')
+                          : MMoviePostersList(
+                              height: height * 0.1,
+                              width: width,
+                              posters: state.getImagesResponse.posters,
+                            ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: height * 0.03),
+                      child: state.getImagesResponse.backdrops.length == 0
+                          ? MEmptyState('screenshots')
+                          : MMovieBackDropsList(
+                              height: height * 0.1,
+                              width: width,
+                              backdrops: state.getImagesResponse.backdrops,
+                            ),
+                    ),
+                  ],
+                );
+              }
+
+              if (state is MovieImagesLoadFailure) {
+                return _buildErrorStateDisplay(height, width, state);
+              }
+              return Container(
+                height: height,
+                child: Center(
+                  child: MDetailsText(
+                      'A problem is occurred during Bloc execution'),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _buildLoadingStateDisplay(double height, double width) {
+    return Container(
+      height: height,
+      width: width,
+      child: MLoadingState(),
+    );
+  }
+
+  Container _buildErrorStateDisplay(
+      double height, double width, MovieImagesLoadFailure state) {
+    return Container(
+      height: height,
+      width: width,
+      child: MErrorState(state.error),
     );
   }
 }

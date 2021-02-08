@@ -201,7 +201,7 @@ class MPopularMovieItem extends StatelessWidget {
 
   Padding _buildMovieTitleDisplay(MovieDetailsLoadSuccess state) {
     return Padding(
-      padding: EdgeInsets.only(top: height * 0.03),
+      padding: EdgeInsets.only(top: height * 0.01),
       child: MMovieItemTitleText(
         state.movieItem.title,
         22.0,

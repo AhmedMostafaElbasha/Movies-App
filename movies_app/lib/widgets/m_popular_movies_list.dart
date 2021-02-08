@@ -29,7 +29,7 @@ class MPopularMoviesList extends StatelessWidget {
                 return Padding(
                   padding: EdgeInsets.only(top: height * 0.05),
                   child: MPopularMovieItem(
-                    height: height * .57,
+                    height: height * .62,
                     width: width,
                     popularMovieItem: popularMoviesItems[index],
                   ),

@@ -1,23 +1,21 @@
-// Package Imports
 import 'package:flutter/material.dart';
-// Inner Imports
-import '../widgets/widgets.dart';
-import '../models/models.dart';
+import './../widgets/widgets.dart';
+import './../models/models.dart';
 
-class MRecentMoviesList extends StatelessWidget {
+class MMoviePostersList extends StatelessWidget {
   final double height;
   final double width;
-  final List<RecentMovieItem> recentMovieItems;
+  final List<Poster> posters;
 
-  MRecentMoviesList({
+  MMoviePostersList({
     @required this.height,
     @required this.width,
-    this.recentMovieItems = const [],
+    this.posters = const [],
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
       width: width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,14 +24,14 @@ class MRecentMoviesList extends StatelessWidget {
             height: height,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: recentMovieItems.length,
+              itemCount: posters.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: width * 0.05),
-                  child: MRecentMovieItem(
+                  child: MMoviePosterItem(
                     height: height,
-                    width: width * 0.36,
-                    recentMovieItem: recentMovieItems[index],
+                    width: width * 0.34,
+                    poster: posters[index],
                   ),
                 );
               },

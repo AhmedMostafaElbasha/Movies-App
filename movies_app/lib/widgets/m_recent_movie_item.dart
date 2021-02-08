@@ -50,7 +50,7 @@ class MRecentMovieItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildMoviePosterImageDisplay(state),
-                    MHeightBox(height * 0.05),
+                    MHeightBox(height * 0.03),
                     _buildMovieTitleDisplay(state),
                   ],
                 ),
