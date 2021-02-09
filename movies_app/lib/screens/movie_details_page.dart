@@ -28,31 +28,102 @@ class MovieDetailsPage extends StatelessWidget {
     return BlocProvider<MovieImagesBloc>(
       create: (context) =>
           MovieImagesBloc()..add(MovieImageFetched(movieId: movieItem.id)),
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        backgroundColor: moviesBackgroundColor,
-        body: Stack(
-          children: [
-            _buildMoviePosterImageDisplay(
-              heroTag,
+      // child: _buildRegularPageBody(heroTag, height, width, movieItem, context),
+      child: _buildSliverPageBody(
+        height: height,
+        width: width,
+        heroTag: heroTag,
+        posterPath: movieItem.posterPath,
+        movieItem: movieItem,
+        context: context,
+      ),
+    );
+  }
+
+  Widget _buildSliverPageBody({
+    @required double height,
+    @required double width,
+    @required String heroTag,
+    @required String posterPath,
+    @required MovieItem movieItem,
+    @required BuildContext context,
+  }) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: moviesBackgroundColor,
+      body: NestedScrollView(
+        // floatHeaderSlivers: true,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              shadowColor: Colors.black54,
+              backgroundColor: Colors.transparent,
+              pinned: true,
+              expandedHeight: height * 0.48,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _buildMoviePosterImageDisplay(
+                  heroTag,
+                  height,
+                  width,
+                  posterPath,
+                ),
+              ),
+              actions: [
+                _buildActionButton(
+                  Icons.upload_rounded,
+                  () {},
+                ),
+                _buildActionButton(
+                  Icons.favorite_border,
+                  () {},
+                ),
+                MWidthBox(16.0),
+              ],
+            ),
+          ];
+        },
+        body: SafeArea(
+          child: Container(
+            // height: height,
+            // width: width,
+            child: _buildMovieInfoContainer(
               height,
               width,
-              movieItem.posterPath,
+              context,
+              movieItem,
             ),
-            _buildCustomAppBar(),
-            Container(
-              // height: height,
-              // width: width,
-              color: Colors.black12,
-              child: _buildMovieInfoContainer(
-                height,
-                width,
-                context,
-                movieItem,
-              ),
-            ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Scaffold _buildRegularPageBody(String heroTag, double height, double width,
+      MovieItem movieItem, BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: moviesBackgroundColor,
+      body: Stack(
+        children: [
+          _buildMoviePosterImageDisplay(
+            heroTag,
+            height,
+            width,
+            movieItem.posterPath,
+          ),
+          _buildCustomAppBar(),
+          Container(
+            // height: height,
+            // width: width,
+            color: Colors.black12,
+            child: _buildMovieInfoContainer(
+              height,
+              width,
+              context,
+              movieItem,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -130,13 +201,15 @@ class MovieDetailsPage extends StatelessWidget {
     MovieItem movieItem,
   ) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.04),
+      padding: EdgeInsets.symmetric(
+        horizontal: width * 0.04,
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MHeightBox(height * 0.39),
+            // MHeightBox(height * 0.01),
             Column(
               children: [
                 Row(
@@ -174,7 +247,7 @@ class MovieDetailsPage extends StatelessWidget {
                   child: MCustomDivider(),
                 ),
                 MSubHeadingText('Photogallery'),
-                _buildPhotoGalleryInfoDisplay(height * 0.12, width),
+                _buildPhotoGalleryInfoDisplay(height * 0.46, width),
               ],
             ),
           ],
@@ -452,21 +525,21 @@ class MovieDetailsPage extends StatelessWidget {
                   physics: ClampingScrollPhysics(),
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: height * 0.03),
+                      padding: EdgeInsets.only(top: height * 0.06),
                       child: state.getImagesResponse.posters.length == 0
                           ? MEmptyState('posters')
                           : MMoviePostersList(
-                              height: height * 0.1,
+                              height: height * 0.15,
                               width: width,
                               posters: state.getImagesResponse.posters,
                             ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: height * 0.03),
+                      padding: EdgeInsets.only(top: height * 0.06),
                       child: state.getImagesResponse.backdrops.length == 0
                           ? MEmptyState('screenshots')
                           : MMovieBackDropsList(
-                              height: height * 0.1,
+                              height: height * 0.15,
                               width: width,
                               backdrops: state.getImagesResponse.backdrops,
                             ),
