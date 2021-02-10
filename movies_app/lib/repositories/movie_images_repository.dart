@@ -27,8 +27,6 @@ class MovieImagesRepository {
       final responseBody = json.decode(response.body);
       final fetchedGetMovieImagesResponse =
           GetImagesResponse.fromJson(responseBody);
-      print(fetchedGetMovieImagesResponse.backdrops);
-      print(fetchedGetMovieImagesResponse.posters);
       return fetchedGetMovieImagesResponse;
     }
   }

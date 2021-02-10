@@ -15,3 +15,7 @@ export 'get_images_response.dart';
 export 'backdrop.dart';
 export 'poster.dart';
 export 'get_details_error.dart';
+export 'get_credits_response.dart';
+export 'get_credits_error.dart';
+export 'cast.dart';
+export 'crew.dart';

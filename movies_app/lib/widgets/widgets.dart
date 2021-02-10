@@ -20,3 +20,5 @@ export 'm_movie_poster_item.dart';
 export 'm_movie_backdrops_list.dart';
 export 'm_movie_backdrop_item.dart';
 export 'm_empty_state.dart';
+export 'm_cast_list.dart';
+export 'm_cast_item.dart';

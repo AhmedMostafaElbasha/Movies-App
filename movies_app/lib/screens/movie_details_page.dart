@@ -2,6 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // Inner Imports
+import '../blocs/blocs.dart';
+import '../blocs/blocs.dart';
+import '../blocs/blocs.dart';
+import '../blocs/blocs.dart';
+import '../blocs/movie_credits/movie_credits.dart';
+import '../blocs/movie_credits/movie_credits.dart';
+import '../blocs/movie_credits/movie_credits.dart';
+import '../blocs/movie_credits/movie_credits.dart';
+import '../widgets/m_cast_list.dart';
+import '../widgets/m_empty_state.dart';
 import '../widgets/widgets.dart';
 import '../models/models.dart';
 import '../constants/constants.dart';
@@ -25,10 +35,21 @@ class MovieDetailsPage extends StatelessWidget {
     MovieItem movieItem = arguments.movieItem;
     print(movieItem.id);
 
-    return BlocProvider<MovieImagesBloc>(
-      create: (context) =>
-          MovieImagesBloc()..add(MovieImageFetched(movieId: movieItem.id)),
-      // child: _buildRegularPageBody(heroTag, height, width, movieItem, context),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MovieImagesBloc>(
+          create: (context) => MovieImagesBloc()
+            ..add(
+              MovieImageFetched(movieId: movieItem.id),
+            ),
+        ),
+        BlocProvider<MovieCreditsBloc>(
+          create: (context) => MovieCreditsBloc()
+            ..add(
+              MovieCreditFetched(movieId: movieItem.id),
+            ),
+        ),
+      ],
       child: _buildSliverPageBody(
         height: height,
         width: width,
@@ -247,7 +268,16 @@ class MovieDetailsPage extends StatelessWidget {
                   child: MCustomDivider(),
                 ),
                 MSubHeadingText('Photogallery'),
-                _buildPhotoGalleryInfoDisplay(height * 0.46, width),
+                _buildPhotoGalleryInfoDisplay(height * 0.25, width),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: MCustomDivider(),
+                ),
+                MSubHeadingText('Cast'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: _buildCastList(height: height * 0.16, width: width),
+                ),
               ],
             ),
           ],
@@ -525,21 +555,21 @@ class MovieDetailsPage extends StatelessWidget {
                   physics: ClampingScrollPhysics(),
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: height * 0.06),
+                      padding: EdgeInsets.only(top: height * 0.04),
                       child: state.getImagesResponse.posters.length == 0
                           ? MEmptyState('posters')
                           : MMoviePostersList(
-                              height: height * 0.15,
+                              height: height * 0.12,
                               width: width,
                               posters: state.getImagesResponse.posters,
                             ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: height * 0.06),
+                      padding: EdgeInsets.only(top: height * 0.04),
                       child: state.getImagesResponse.backdrops.length == 0
                           ? MEmptyState('screenshots')
                           : MMovieBackDropsList(
-                              height: height * 0.15,
+                              height: height * 0.12,
                               width: width,
                               backdrops: state.getImagesResponse.backdrops,
                             ),
@@ -565,6 +595,41 @@ class MovieDetailsPage extends StatelessWidget {
     );
   }
 
+  Widget _buildCastList({double height, double width}) {
+    return Container(
+      height: height,
+      width: width,
+      child: BlocBuilder<MovieCreditsBloc, MovieCreditsState>(
+        builder: (context, state) {
+          if (state is MovieCreditsLoadInProgress) {
+            return _buildLoadingStateDisplay(height, width);
+          }
+
+          if (state is MovieCreditsLoadSuccess) {
+            return state.getCreditsResponse.cast.length == 0
+                ? MEmptyState('cast')
+                : MCastList(
+                    height: height,
+                    width: width,
+                    cast: state.getCreditsResponse.cast,
+                  );
+          }
+
+          if (state is MovieCreditsLoadFailure) {
+            return _buildErrorStateDisplay(height, width, state);
+          }
+          return Container(
+            height: height,
+            child: Center(
+              child:
+                  MDetailsText('A problem is occurred during Bloc execution'),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Container _buildLoadingStateDisplay(double height, double width) {
     return Container(
       height: height,
@@ -574,7 +639,7 @@ class MovieDetailsPage extends StatelessWidget {
   }
 
   Container _buildErrorStateDisplay(
-      double height, double width, MovieImagesLoadFailure state) {
+      double height, double width, dynamic state) {
     return Container(
       height: height,
       width: width,

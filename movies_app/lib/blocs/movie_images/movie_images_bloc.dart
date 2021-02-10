@@ -27,8 +27,6 @@ class MovieImagesBloc extends Bloc<MovieImagesEvent, MovieImagesState> {
           await _movieImagesRepository.getMovieImages(event.movieId);
 
       if (_getImagesResponse != null) {
-        print(_getImagesResponse.posters);
-        print(_getImagesResponse.backdrops);
         yield MovieImagesLoadSuccess(getImagesResponse: _getImagesResponse);
       } else {
         yield MovieImagesLoadFailure(
