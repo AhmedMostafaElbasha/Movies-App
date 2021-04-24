@@ -22,18 +22,14 @@ class MCastItem extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Container(
-              height: height * .8,
-              child: CircleAvatar(
-                radius: 20.0,
-                child: Image.network(
-                  _buildCastProfilePath(cast.profilePath),
-                  fit: BoxFit.cover,
-                ),
+            CircleAvatar(
+              radius: 30.0,
+              backgroundImage: NetworkImage(
+                _buildCastProfilePath(cast.profilePath),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: height * 0.2),
+              padding: EdgeInsets.only(top: height * 0.1),
               child: Text(
                 cast.name,
                 style: TextStyle(
