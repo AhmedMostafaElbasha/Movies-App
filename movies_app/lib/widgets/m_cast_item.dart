@@ -21,6 +21,7 @@ class MCastItem extends StatelessWidget {
       width: width,
       child: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 30.0,
@@ -32,6 +33,7 @@ class MCastItem extends StatelessWidget {
               padding: EdgeInsets.only(top: height * 0.1),
               child: Text(
                 cast.name,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold,
